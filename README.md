@@ -77,6 +77,7 @@ The species represented in the experimental results include:
 | *Dasypus novemcinctus* |
 <img src="https://github.com/andressa15alm/Wildlife-Detection/blob/main/7.png" width="800">
 <img src="https://github.com/andressa15alm/Wildlife-Detection/blob/main/6.png" width="800">
+Image credits: Associação Civil Felinos do Aguaí and Parque Natural Municipal Mozart Rocha Loures.
 
 ## Methodology
 
