@@ -4,7 +4,6 @@
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
 ![YOLO11](https://img.shields.io/badge/YOLO11-Ultralytics-purple)
-![MySQL](https://img.shields.io/badge/Database-MySQL-blue?logo=mysql)
 ![Computer Vision](https://img.shields.io/badge/Computer-Vision-orange)
 ![Research](https://img.shields.io/badge/Type-Academic%20Research-green)
 
@@ -207,11 +206,9 @@ The following metrics were used in the experiments:
 | Python | Model development and data processing |
 | MegaDetector v5A | Initial image screening |
 | YOLO11 | Custom wildlife object detection |
-| PyTorch | Deep learning framework |
 | Ultralytics | YOLO11 training and evaluation |
 | Google Colab | Experimental execution and GPU processing |
 | Roboflow | Image annotation and dataset management |
-| MySQL | Storage and organization of inference results |
 
 ## Limitations
 
@@ -228,6 +225,26 @@ Further studies could investigate:
 - Additional data augmentation strategies.
 - Evaluation with larger and more diverse datasets.
 - Integration with ecological monitoring and analysis systems.
+  
+## Reproducing the Workflow
+
+The complete workflow developed in this research can be reproduced using the Google Colab notebook provided in this repository.
+
+**[Open the Google Colab Notebook](https://colab.research.google.com/drive/1FBX5HvAerKQcLJCqqY6H6BuXUiNdwAUM?usp=sharing)**
+The notebook guides users through the execution of both detection models, following the methodology adopted in this study:
+
+1. **MegaDetector v5A:** Initial image screening to identify images containing wildlife.
+2. **Custom YOLO11:** Detection and classification of wildlife into the 11 taxonomic classes defined in this research.
+
+## Directory Description
+
+| Directory | Description |
+|---|---|
+| `megadetector/` | Contains the MegaDetector v5 implementation used in this research. |
+| `yolov5/` | Contains the YOLOv5 implementation, required as a dependency by MegaDetector v5. |
+| `models/` | Contains the custom-trained YOLO11 model weights obtained in this research. The final model was trained using data augmentation. |
+| `notebook/` | Contains the Google Colab notebook with the workflow for running both models according to the methodology described in this study. |
+| `docs/` | Contains the complete bibliography and references used throughout this research. |
 
 ## References
 
