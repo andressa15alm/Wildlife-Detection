@@ -1,284 +1,60 @@
+# A Locally Adapted Deep-Learning Workflow for Automated Mammal Recognition in Camera-Trap Imagery from Southern Brazil
 
-# Wildlife Detection in Camera-Trap Images
-### Computer Vision and Deep Learning Applied to Wildlife Monitoring in the Araucaria Forest
-
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andressa15alm/Wildlife-Detection/blob/main/notebooks/wildlife_detection_workflow.ipynb)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
 ![YOLO11](https://img.shields.io/badge/YOLO11-Ultralytics-purple)
-![Computer Vision](https://img.shields.io/badge/Computer-Vision-orange)
-![Research](https://img.shields.io/badge/Type-Academic%20Research-green)
+![License](https://img.shields.io/badge/License-MIT-green)
 
----
+This repository provides the companion code, reproducible Google Colab workflow, and documentation for the study "A locally adapted deep-learning workflow for automated mammal recognition in camera-trap imagery from southern Brazil." It presents a two-stage computer vision pipeline combining MegaDetector v5A for automated wildlife screening and a locally adapted YOLO11 object-detection model for recognizing 11 mammalian taxa in camera-trap photographs from southern Brazil, supporting scalable biodiversity monitoring within a human-in-the-loop framework.
 
-## Overview
+## Architecture & Visual Overview
+![Workflow Architecture](https://github.com/andressa15alm/Wildlife-Detection/blob/main/arquitetura.png)
 
-This project investigates the application of Artificial Intelligence and Computer Vision techniques to automate wildlife detection and identification in camera-trap images.
-
-The research evaluates an automated workflow combining **MegaDetector v5A** and a custom-trained **YOLO11** model to process images collected from environmental conservation areas located in two distinct Brazilian forest formations: Mixed Ombrophilous Forest (Araucaria Forest) and Dense Ombrophilous Forest.
-
-The proposed approach addresses the challenges associated with manual analysis of large volumes of camera-trap images, investigating automated methods for image screening, object detection, and species-level classification.
-
-This study was developed as part of an undergraduate thesis in Systems Analysis and Development at Faculdade Municipal de Educação e Meio Ambiente (FAMA), Brazil, in 2025.
-## Arquitetura
-![Web ](https://github.com/andressa15alm/Wildlife-Detection/blob/main/arquitetura.png) 
-
-## Research Objectives
-
-The main objective was to develop and evaluate an automated workflow based on Artificial Intelligence for wildlife screening, detection, and classification in camera-trap images.
-
-Specific objectives:
-
-- Evaluate MegaDetector v5A for automated identification of images containing wildlife.
-- Develop and train a custom YOLO11 object detection model using real-world camera-trap data.
-- Evaluate model performance using object detection metrics.
-- Compare the results of different training configurations.
-- Investigate the applicability of automated detection models to environmental monitoring.
-
-## Dataset
-
-### Data Sources
-
-The research used images obtained from camera traps installed in two different forest environments:
-
-| Data Source | Location | Forest Formation |
-|---|---|---|
-| Parque Municipal Natural Mozart Rocha Loures | Clevelândia, Paraná, Brazil | Mixed Ombrophilous Forest |
-| Associação Felinos do Aguaí | Siderópolis, Santa Catarina, Brazil | Dense Ombrophilous Forest |
-
-### Dataset Composition
-
-A total of **12,197 images** were manually reviewed and classified.
-
-| Category | Number of Images |
-|---|---:|
-| Images containing wildlife | 11,474 |
-| Empty images | 723 |
-| **Total** | **12,197** |
-
-Manual classification was used as the reference for evaluating the MegaDetector model and identifying wildlife images for the subsequent YOLO11 training stage.
-
-### Detection Classes
-
-The custom YOLO11 model was organized into 11 taxonomic classes, including five felid classes and six additional mammal classes.
-
-The species represented in the experimental results include:
-
-| Scientific Name |
-|---|
-| *Cerdocyon thous* |
-| *Sus scrofa* |
-| *Procyon cancrivorus* |
-| *Mazama gouazoubira* |
-| *Leopardus guttulus* |
-| *Leopardus wiedii* |
-| *Eira barbara* |
-| *Herpailurus yagouaroundi* |
-| *Leopardus pardalis* |
-| *Puma concolor* |
-| *Dasypus novemcinctus* |
-<img src="https://github.com/andressa15alm/Wildlife-Detection/blob/main/7.png" width="800">
-<img src="https://github.com/andressa15alm/Wildlife-Detection/blob/main/6.png" width="800">
+<img src="https://github.com/andressa15alm/Wildlife-Detection/blob/main/7.png" width="800" alt="Detection example 1">
+<img src="https://github.com/andressa15alm/Wildlife-Detection/blob/main/6.png" width="800" alt="Detection example 2">
 Image credits: Associação Civil Felinos do Aguaí and Parque Natural Municipal Mozart Rocha Loures.
 
-## Methodology
-
-The research was organized into three main stages.
-
-### 1. Manual Image Classification
-
-The original camera-trap images were manually inspected to identify:
-
-- Presence or absence of wildlife.
-- Species represented in positive images.
-- Images suitable for subsequent model evaluation and training.
-
-This process established the reference classifications used in the experiments.
-
-### 2. Automated Screening with MegaDetector v5A
-
-MegaDetector v5A was used as an initial object detection and screening stage.
-
-The model processed the same 12,197 images previously classified manually.
-
-The experiment focused on identifying images containing wildlife and filtering empty images.
-
-**Experimental Configuration**
-
-| Parameter | Configuration |
-|---|---|
-| Model | MegaDetector v5A |
-| Execution Environment | Google Colab |
-| Hardware | GPU |
-| Confidence Threshold | 0.90 |
-
-**Evaluation Results**
-
-| Metric | Result |
-|---|---:|
-| Precision | 1.000 |
-| Recall | 0.385 |
-| Specificity | 1.000 |
-| F-score | 0.556 |
-
-The results indicate high precision and specificity, but considerably lower recall at the selected confidence threshold.
-
-This behavior demonstrates the importance of confidence threshold selection and complementary manual review when applying automated detection to ecological datasets.
-
-### 3. Custom YOLO11 Training
-
-Images manually classified as containing wildlife were used to train a custom object detection model based on YOLO11.
-
-The dataset was organized into 11 taxonomic classes.
-
-**Training Configuration**
-
-| Parameter | Configuration |
-|---|---|
-| Architecture | YOLO11 |
-| Pretrained Weights | `yolo11l.pt` |
-| Training Environment | Google Colab |
-| Hardware | GPU |
-| Epochs | 100 |
-| Image Size | 640 × 640 |
-| Training Split | 80% |
-| Validation Split | 15% |
-| Test Split | 5% |
-| Annotation Platform | Roboflow |
-
-Two model configurations were evaluated.
-
-#### Model 1 — Original Dataset
-
-The first model was trained using the original annotated dataset without additional data augmentation.
-
-#### Model 2 — Data Augmentation
-
-The second model incorporated data augmentation techniques to increase training data diversity.
-
-The resulting training dataset contained **27,742 images**.
-
-Applied transformations:
-
-| Transformation | Configuration |
-|---|---|
-| Outputs per Example | 3 |
-| Horizontal Flip | Enabled |
-| Vertical Flip | Enabled |
-| 90° Rotation | Clockwise and Counter-clockwise |
-| Free Rotation | Between -15° and +15° |
-
-The two configurations were compared to investigate the impact of data augmentation on detection performance.
-
-## Experimental Results
-
-### YOLO11 Performance Comparison
-
-The overall results obtained by both configurations are presented below.
-
-| Metric | Model 1 | Model 2 |
-|---|---:|---:|
-| Precision | 0.979 | 0.983 |
-| Recall | 0.987 | 0.985 |
-| mAP50 | 0.991 | 0.991 |
-
-### Results Interpretation
-
-The comparative evaluation showed that data augmentation produced a slight increase in precision, from 0.979 to 0.983.
-
-Recall decreased slightly, from 0.987 to 0.985, while mAP50 remained unchanged at 0.991.
-
-These results indicate that both configurations achieved similar overall detection performance.
-
-The augmented configuration demonstrated a small improvement in precision, while maintaining high recall and object localization performance.
-
-### Evaluation Metrics
-
-The following metrics were used in the experiments:
-
-- **Precision:** Measures the proportion of positive detections that are correct.
-- **Recall:** Measures the proportion of actual positive instances successfully detected.
-- **Specificity:** Measures the proportion of negative instances correctly identified.
-- **F-score:** Harmonic mean of precision and recall.
-- **mAP50:** Mean Average Precision calculated at an Intersection over Union (IoU) threshold of 0.5.
-
-## Technologies and Tools
-
-| Technology | Application |
-|---|---|
-| Python | Model development and data processing |
-| MegaDetector v5A | Initial image screening |
-| YOLO11 | Custom wildlife object detection |
-| Ultralytics | YOLO11 training and evaluation |
-| Google Colab | Experimental execution and GPU processing |
-| Roboflow | Image annotation and dataset management |
-
-## Limitations
-
-The experiments were conducted using a specific dataset collected from two forest environments.
-
-The reported metrics represent the performance observed under the experimental conditions described in the research and should not be interpreted as a guarantee of equivalent performance in other environments or datasets.
-
-The MegaDetector experiment also demonstrated that a high confidence threshold can reduce recall, reinforcing the importance of reviewing missed detections.
-
-Further studies could investigate:
-
-- Model generalization across different ecological environments.
-- Performance under different confidence thresholds.
-- Additional data augmentation strategies.
-- Evaluation with larger and more diverse datasets.
-- Integration with ecological monitoring and analysis systems.
-  
-## Reproducing the Workflow
-
-The complete workflow developed in this research can be reproduced using the Google Colab notebook provided in this repository.
-
-**[Open the Google Colab Notebook](https://colab.research.google.com/drive/1FBX5HvAerKQcLJCqqY6H6BuXUiNdwAUM?usp=sharing)**
-The notebook guides users through the execution of both detection models, following the methodology adopted in this study:
-
-1. **MegaDetector v5A:** Initial image screening to identify images containing wildlife.
-2. **Custom YOLO11:** Detection and classification of wildlife into the 11 taxonomic classes defined in this research.
-
-## Directory Description
-
-| Directory | Description |
-|---|---|
-| `megadetector/` | Contains the MegaDetector v5 implementation used in this research. |
-| `yolov5/` | Contains the YOLOv5 implementation, required as a dependency by MegaDetector v5. |
-| `models/` | Contains the custom-trained YOLO11 model weights obtained in this research. The final model was trained using data augmentation. |
-| `notebook/` | Contains the Google Colab notebook with the workflow for running both models according to the methodology described in this study. |
-| `docs/` | Contains the complete bibliography and references used throughout this research. |
-
-## References
-
-The research was based on scientific literature concerning camera-trap monitoring, computer vision, deep learning, and wildlife conservation.
-
-Selected references:
-
-- Fennell, M.; Beirne, C.; Burton, A. C. (2022). Accelerating camera trap image processing with MegaDetector and ecological context.
-- Schneider, S. et al. (2018). Deep learning object detection methods for ecological camera trap data.
-- Ferrante, L. et al. (2024). Evaluating YOLO architectures for detecting road killed endangered Brazilian animals.
-- Trolliet, F. et al. (2014). Use of camera traps for wildlife studies: A review.
-- Tuia, D. et al. (2022). Perspectives in machine learning for wildlife conservation.
-
-For the complete bibliography, see `docs/references.md`.
-
-## Citation
-
-If you use or reference this research, please cite the original undergraduate thesis:
-
-**PAULA, Andressa Almeida de.** *Desafios na Identificação de Fauna com Camera-Trap: Uso de Modelos de Detecção na Mata de Araucárias.* 2025. Trabalho de Conclusão de Curso (Tecnologia em Análise e Desenvolvimento de Sistemas) — Faculdade Municipal de Educação e Meio Ambiente, Clevelândia, Paraná, 2025.
-
-## Author
-
-**Andressa Almeida de Paula**
-
-Research interests:
-
-- Artificial Intelligence
-- Computer Vision
-- Deep Learning
-- Wildlife Monitoring
-- Data Science
-
----
-
-*Academic research project developed in 2025.*
+## Systematic Workflow: Methodology, Operationalization, and Results
+
+### 1. Methodology
+1. **Study Sites & Image Compilation:** Camera-trap photographs (Bushnell Core DS No-Glow 30 MP, model 119977C) were compiled from two southern Brazilian forest contexts: *Parque Municipal Natural Mozart Rocha Loures* (Clevelândia, Paraná; Mixed Ombrophilous Forest / Araucaria Forest; Dec 2022–Jan 2025) and *Associação Civil Felinos do Aguaí* near *Reserva Biológica Estadual do Aguaí* (Siderópolis, Santa Catarina; Dense Ombrophilous Forest; 2015–2019), totaling **12,197** manually inspected images (**11,474** wildlife-positive [94.1%] and **723** empty [5.9%]).
+2. **Reference Labelling & Taxonomy:** Manual review established presence/absence ground truth and object-level bounding-box annotations in **Roboflow** across **11 mammalian taxa** (5 felids: *Leopardus guttulus*, *Leopardus wiedii*, *Leopardus pardalis*, *Herpailurus yagouaroundi*, *Puma concolor*; and 6 other mammals: *Cerdocyon thous*, *Sus scrofa*, *Procyon cancrivorus*, *Mazama gouazoubira*, *Eira barbara*, *Dasypus novemcinctus*).
+3. **Dataset Partitioning & Augmentation:** The **11,474** wildlife images were split at the image level into **80% training (9,254)**, **15% validation (1,673)**, and **5% test (547)**. Two YOLO11 configurations (`yolo11l.pt`, 100 epochs, `640 × 640`, GPU in Google Colab) were compared:
+   - **Without data augmentation:** Trained on the original 9,254 training images.
+   - **With data augmentation:** Training set expanded threefold to **27,742** images via Roboflow geometric transformations (3 outputs/example; horizontal/vertical flips; 90° clockwise/counter-clockwise rotations; free rotations from −15° to +15°), keeping validation and test sets untouched.
+4. **Stage 1 — Automated Screening (MegaDetector v5A):** All **12,197** images were processed in Google Colab (GPU) via `run_detector_batch.py` (initial threshold `0.50` for score inspection; evaluated at `0.80`, `0.85`, and operational threshold `0.90` for animal-category detections, outputting JSON detections and quality-control overlays).
+5. **Stage 2 — Local Taxonomic Detection (YOLO11) & Human-in-the-Loop Evaluation:** MegaDetector screening was evaluated at the image level (Precision, Recall, Specificity, F1-score), and YOLO11 models were evaluated on the validation set (1,673 images; 1,725 annotated instances) using Precision, Recall, **mAP50**, and **mAP50–95**, alongside human-effort reduction metrics (`HRMD` and automation coverage `AC`) within a human-in-the-loop review workflow.
+
+### 2. Operationalization (Google Colab & Repository Execution)
+1. **Environment Setup:** Open the Colab notebook from the GitHub repository, select a **GPU runtime**, clone/pull the repository, and install dependencies (`ultralytics`, `torch`, and helper utilities).
+2. **Stage 1 Screening (`MegaDetector v5A`):** Run batch inference on new camera-trap photographs to generate detection JSONs, inspect confidence thresholds (e.g., `0.50` exploratory vs. `0.90` conservative), and separate candidate wildlife images from empty frames.
+3. **Stage 2 Taxonomic Inference (`YOLO11`):** Load the custom YOLO11 weights (`best.pt`) and run object detection on wildlife images to obtain bounding boxes, predicted taxon labels, and confidence scores.
+4. **Human-in-the-Loop Review & Export:** Route low-confidence detections, potential false negatives (especially under conservative thresholds), or ambiguous species predictions to expert/manual verification, and export structured results (CSV/JSON/annotated images) for ecological analysis.
+
+### 3. Key Results
+- **MegaDetector v5A Screening (12,197 images):** Generated **10,804** animal detections across **10,127** images at threshold `0.50` (scores `0.250–0.987`, mean `0.822 ± 0.163`, median `0.881`; retaining **72.1%** at `0.80`, **60.5%** at `0.85`, and **41.1%** [4,444 detections] at `0.90`). At threshold **`0.90`**, Precision = **1.000**, Specificity = **1.000**, Recall = **0.385**, and F1-score = **0.556**—showing zero false positives at high confidence, but a conservative recall that requires threshold calibration or human review to avoid missed records.
+- **YOLO11 Taxonomic Detection (Validation: 1,673 images, 1,725 instances):**
+  - *Without augmentation:* Precision = **0.979**, Recall = **0.987**, mAP50 = **0.991**, mAP50–95 = **0.865** (class mAP50 from `0.963` for *Sus scrofa* to `0.995` for five taxa; mAP50–95 from `0.792` for *Dasypus novemcinctus* and `0.795` for *Sus scrofa* to `0.935` for *Puma concolor*).
+  - *With augmentation (27,742 training images):* Precision = **0.983**, Recall = **0.985**, mAP50 = **0.991**, mAP50–95 = **0.866**—yielding marginal aggregate gains and taxon-specific shifts (e.g., mAP50–95 rose for *Sus scrofa* [`0.795` → `0.811`] and *Puma concolor* [`0.935` → `0.942`], while dipping slightly for *Procyon cancrivorus* [`0.845` → `0.832`] and *Mazama gouazoubira* [`0.881` → `0.874`]).
+
+
+## Quick Start in Google Colab
+1. Click **Open In Colab** above (or open `notebooks/wildlife_detection_workflow.ipynb`).
+2. Set the runtime hardware accelerator to **GPU** (`Runtime > Change runtime type > T4 GPU` or equivalent).
+3. Run the setup and inference cells using sample camera-trap images and the released model weights.
+
+> **Note on data & weights:** Depending on file size and data-sharing permissions for camera-trap imagery, raw field images may be restricted or provided as small sample examples, while trained model weights and notebooks are versioned via GitHub Releases / Zenodo.
+
+## Authors & Contributors
+- **Andressa A. de Paula**
+- **Sebastián Narváez-Barrios**
+- **Juliano A. Bogoni**
+- **Manoel dos Santos Filho**
+- **Micheli XYZ**
+- **Mário M. Tagliari** (Corresponding author: `mariotagliari@utfpr.edu.br`)
+
+## Citation & DOI
+Once the GitHub release is linked to Zenodo, update the DOI badge and `CITATION.cff` with the assigned DOI:
+
+> de Paula, A. A., Narváez-Barrios, S., Bogoni, J. A., dos Santos Filho, M., [Micheli], & Tagliari, M. M. (2026). *A locally adapted deep-learning workflow for automated mammal recognition in camera-trap imagery from southern Brazil* [Code and workflow]. GitHub / Zenodo. https://doi.org/10.5281/zenodo.XXXXXXX
