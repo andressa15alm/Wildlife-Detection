@@ -40,7 +40,7 @@ Image credits: Associação Civil Felinos do Aguaí and Parque Natural Municipal
 
 
 ## Quick Start in Google Colab
-1. Click **Open In Colab** above (or open `notebooks/wildlife_detection_workflow.ipynb`).
+1. Click **Open In Colab** above (or open `notebook/How_to_Run.ipynb`).
 2. Set the runtime hardware accelerator to **GPU** (`Runtime > Change runtime type > T4 GPU` or equivalent).
 3. Run the setup and inference cells using sample camera-trap images and the released model weights.
 
@@ -51,7 +51,7 @@ Image credits: Associação Civil Felinos do Aguaí and Parque Natural Municipal
 - **Sebastián Narváez-Barrios**
 - **Juliano A. Bogoni**
 - **Manoel dos Santos Filho**
-- **Micheli XYZ**
+- **Micheli**
 - **Mário M. Tagliari** (Corresponding author: `mariotagliari@utfpr.edu.br`)
 
 ## Citation & DOI
