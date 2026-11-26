@@ -1,6 +1,6 @@
 # A Locally Adapted Deep-Learning Workflow for Automated Mammal Recognition in Camera-Trap Imagery from Southern Brazil
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andressa15alm/Wildlife-Detection/blob/main/notebooks/wildlife_detection_workflow.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1FBX5HvAerKQcLJCqqY6H6BuXUiNdwAUM?usp=sharing)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
 ![YOLO11](https://img.shields.io/badge/YOLO11-Ultralytics-purple)
